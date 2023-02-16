@@ -1,5 +1,6 @@
 import { AnyRecord, BaseModels } from '@voiceflow/base-types';
 import * as FS from 'fs';
+import glob from 'glob';
 import * as Path from 'path';
 
 import { DataAPI } from './types';
@@ -21,21 +22,16 @@ class LocalDataAPI<
 
   constructor({ projectSource }: { projectSource: string }, { fs, path }: { fs: typeof FS; path: typeof Path }) {
     if (!projectSource) throw new Error('project source undefined');
-
-    const projectSources = projectSource.split('|||');
-
+    const pattern = path.join('projects', '*.vf').replace(/\\/g, '/');
+    const vfFiles = glob.sync(pattern);
     this.versions = [];
     this.projects = [];
     this.programs = {};
 
-    projectSources.forEach((projectSourceString: string) => {
-      const projectSource = projectSourceString.split('*KEY*')[0];
-      const content = JSON.parse(fs.readFileSync(path.join('projects', projectSource), 'utf8'));
+    vfFiles.forEach((vfFile) => {
+      const content = JSON.parse(fs.readFileSync(vfFile, 'utf8'));
 
       if (!this.projects.find((project) => project._id === content.project._id)) {
-        const key = projectSourceString.split('*KEY*')[1];
-        this.apiKeyIDs[key] = content.project._id;
-
         this.versions.push(content.version);
         this.projects.push(content.project);
         Object.assign(this.programs, content.programs);
