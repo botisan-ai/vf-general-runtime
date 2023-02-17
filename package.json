@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.179.0",
+    "@keyvhq/compress": "^1.6.26",
+    "@keyvhq/core": "^1.6.26",
+    "@keyvhq/redis": "^1.6.26",
     "@opentelemetry/api-metrics": "0.26.0",
     "@types/workerpool": "^5.0.1",
     "@voiceflow/alexa-types": "2.12.31",
