@@ -5,6 +5,7 @@ import { Config } from '@/types';
 
 import Analytics, { AnalyticsSystem } from './analytics';
 import DataAPI from './dataAPI';
+import KeyvRedis from './keyv';
 import Metrics, { MetricsType } from './metrics';
 import MongoDB from './mongodb';
 import { RedisClient } from './redis';
@@ -16,6 +17,7 @@ export interface ClientMap extends StaticType {
   redis: ReturnType<typeof RedisClient>;
   rateLimitClient: ReturnType<typeof RateLimitClient>;
   mongo: MongoDB | null;
+  keyvRedis: any;
   analyticsClient: AnalyticsSystem | null;
 }
 
@@ -33,6 +35,7 @@ const buildClients = (config: Config): ClientMap => {
     dataAPI: new DataAPI({ config, mongo }),
     metrics: Metrics(config),
     rateLimitClient: RateLimitClient('general-runtime', redis, config),
+    keyvRedis: KeyvRedis(config),
     analyticsClient: Analytics(config),
   };
 };
