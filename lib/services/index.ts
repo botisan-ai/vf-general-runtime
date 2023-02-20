@@ -9,7 +9,7 @@ import Filter from './filter';
 import Interact from './interact';
 import NLU from './nlu';
 import Runtime from './runtime';
-import { LocalSession, MongoSession, RedisSession, Session } from './session';
+import { LocalSession, MinioSession, MongoSession, RedisSession, Session } from './session';
 import { Source } from './session/constants';
 import Slots from './slots';
 import Speak from './speak';
@@ -67,6 +67,8 @@ const buildServices = (config: Config, clients: ClientMap): FullServiceMap => {
     services.session = new MongoSession(services, config);
   } else if (config.SESSIONS_SOURCE === Source.REDIS) {
     services.session = new RedisSession(services, config);
+  } else if (config.SESSIONS_SOURCE === Source.MINIO) {
+    services.session = new MinioSession(services, config);
   }
 
   return services;

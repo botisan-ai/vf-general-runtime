@@ -6,6 +6,7 @@
 import './envSetup';
 
 import { getOptionalProcessEnv, getRequiredProcessEnv } from '@voiceflow/backend-utils';
+import { ClientOptions } from 'minio';
 
 import { Config } from './types';
 
@@ -89,6 +90,20 @@ const CONFIG: Config = {
   ANALYTICS_WRITE_KEY: getOptionalProcessEnv('ANALYTICS_WRITE_KEY') || null,
 
   INGEST_V2_WEBHOOK_ENDPOINT: getOptionalProcessEnv('INGEST_V2_WEBHOOK_ENDPOINT') || null,
+
+  BUCKET_NAME: getOptionalProcessEnv('BUCKET_NAME'),
+  MINIO_OPTIONS: {
+    endPoint: getOptionalProcessEnv('MINIO_OPTIONS_END_POTION'),
+    accessKey: getOptionalProcessEnv('MINIO_OPTIONS_ACCESS_KEY'),
+    secretKey: getOptionalProcessEnv('MINIO_OPTIONS_SECRET_KEY'),
+    useSSL: getOptionalProcessEnv('MINIO_OPTIONS_USE_SSL') === 'true',
+    port: Number(getOptionalProcessEnv('MINIO_OPTIONS_PORT')) || undefined,
+    region: getOptionalProcessEnv('MINIO_OPTIONS_REGION') || undefined,
+    transport: getOptionalProcessEnv('MINIO_OPTIONS_TRANSPORT') || undefined,
+    sessionToken: getOptionalProcessEnv('MINIO_OPTIONS_SESSION_TOKEN') || undefined,
+    partSize: Number(getOptionalProcessEnv('MINIO_OPTIONS_PART_SIZE')) || undefined,
+    pathStyle: getOptionalProcessEnv('MINIO_OPTIONS_PATH_STYLE') === 'true',
+  } as ClientOptions,
 };
 
 export default CONFIG;
