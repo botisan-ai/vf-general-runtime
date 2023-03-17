@@ -5,14 +5,16 @@ import KeyvMinioClient from '@/lib/clients/keyv-minio';
 import SessionManager from '@/lib/services/session/minio';
 
 const config = {
-  BUCKET_NAME: 'europetrip',
+  // BUCKET_NAME: 'europetrip',
+  BUCKET_NAME: 'vf-runtime-test',
   MINIO_OPTIONS: {
-    endPoint: 'play.min.io',
-    accessKey: 'Q3AM3UQ867SPQQA43P2F',
+    endPoint: 'vf-runtime-test.s3.ap-northeast-1.amazonaws.com',
     // eslint-disable-next-line no-secrets/no-secrets
-    secretKey: 'zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG',
-    useSSL: true,
-    port: 9000,
+    accessKey: 'AKIAWGBI4NJGCW3C6NGS',
+    // eslint-disable-next-line no-secrets/no-secrets
+    secretKey: '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',
+    useSSL: false,
+    region: 'ap-northeast-1',
   },
   SESSIONS_SOURCE: 'minio',
 };

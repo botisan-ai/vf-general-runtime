@@ -49,7 +49,6 @@ export class KeyvMinio extends EventEmitter implements Keyv.Store<string> {
       await this.client.putObject(this.bucketName, this.getKeyName(key), value, {
         'Content-Type': 'application/json',
       });
-
       return true;
     } catch (e) {
       logger.error('Error setting key', e);
