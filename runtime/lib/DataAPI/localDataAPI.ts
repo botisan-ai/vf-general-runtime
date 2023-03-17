@@ -22,7 +22,7 @@ class LocalDataAPI<
 
   constructor({ projectSource }: { projectSource: string }, { fs, path }: { fs: typeof FS; path: typeof Path }) {
     if (!projectSource) throw new Error('project source undefined');
-    const pattern = path.join('projects', '*.vf').replace(/\\/g, '/');
+    const pattern = path.join(projectSource, '*.vf').replace(/\\/g, '/');
     const vfFiles = glob.sync(pattern);
     this.versions = [];
     this.projects = [];
