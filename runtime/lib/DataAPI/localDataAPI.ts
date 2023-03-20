@@ -47,6 +47,8 @@ class LocalDataAPI<
     return this.versions.find((version) => version._id === versionID) as V;
   };
 
+  public unhashVersionID = async (versionID: string) => versionID;
+
   public getProgram = async (programID: string) => this.programs[programID];
 
   public getProject = async (projectID: string) => {
