@@ -1,6 +1,7 @@
 import { State } from '@/runtime';
 
 export { default as LocalSession } from './local';
+export { default as MinioSession } from './minio';
 export { default as MongoSession } from './mongo';
 
 export interface Session {

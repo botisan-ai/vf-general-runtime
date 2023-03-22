@@ -2,6 +2,7 @@ import { RateLimitConfig, Validator } from '@voiceflow/backend-utils';
 import { BaseRequest, BaseTrace } from '@voiceflow/base-types';
 import * as Express from 'express';
 import http from 'http';
+import { ClientOptions } from 'minio';
 
 import { RuntimeRequest } from '@/lib/services/runtime/types';
 import CacheDataAPI from '@/lib/services/state/cacheDataAPI';
@@ -69,6 +70,9 @@ export interface Config extends RateLimitConfig {
   ANALYTICS_ENDPOINT: string | null;
   ANALYTICS_WRITE_KEY: string | null;
   INGEST_V2_WEBHOOK_ENDPOINT: string | null;
+
+  BUCKET_NAME: string | null;
+  MINIO_OPTIONS: ClientOptions;
 }
 
 export interface Request<
